@@ -4,14 +4,21 @@ import numpy as np
 
 
 st.title('Aplicação para o Método da Bissecção')
-st.write('Escreva a função: ')
-
+st.write('Insira os valores da função:')
+text_input = st.text_input("Xˆ5: ") 
+text_input = st.text_input("Xˆ4: ")
+text_input = st.text_input("Xˆ3: ")
+text_input = st.text_input("Xˆ2: ")
+text_input = st.text_input("X: ")
+text_input = st.text_input("C: ")
+text_input = st.text_input("Epsilon: ")
 
 progress_bar = st.sidebar.progress(0)
 status_text = st.sidebar.empty()
 last_rows = np.random.randn(1, 1)
 chart = st.line_chart(last_rows)
 
+st.write('Obs: grafico teste')
 for i in range(1, 101):
     new_rows = last_rows[-1, :] + np.random.randn(5, 1).cumsum(axis=0)
     status_text.text("%i%% Complete" % i)
