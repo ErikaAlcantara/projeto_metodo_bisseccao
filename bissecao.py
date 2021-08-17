@@ -2,6 +2,11 @@ import streamlit as st
 import time
 import numpy as np
 
+
+st.title('Aplicação para o Método da Bissecção')
+st.write('Escreva a função: ')
+
+
 progress_bar = st.sidebar.progress(0)
 status_text = st.sidebar.empty()
 last_rows = np.random.randn(1, 1)
