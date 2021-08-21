@@ -5,13 +5,16 @@ import numpy as np
 
 st.title('Aplicação para o Método da Bissecção')
 st.write('Insira os valores da função:')
-text_input = st.text_input("Xˆ5: ") 
-text_input = st.text_input("Xˆ4: ")
-text_input = st.text_input("Xˆ3: ")
-text_input = st.text_input("Xˆ2: ")
-text_input = st.text_input("X: ")
-text_input = st.text_input("C: ")
-text_input = st.text_input("Epsilon: ")
+num_input1 = st.number_input("Xˆ5: ", min_value = -100, max_value=100, value=0, step=1) 
+num_input2 = st.number_input("Xˆ4: ", min_value = -100, max_value=100, value=0, step=1) 
+num_input3 = st.number_input("Xˆ3: ", min_value = -100, max_value=100, value=0, step=1) 
+num_input4 = st.number_input("Xˆ2: ", min_value = -100, max_value=100, value=0, step=1) 
+num_input5 = st.number_input("X: ", min_value = -100, max_value=100, value=0, step=1) 
+num_input6 = st.number_input("C: ", min_value = -100, max_value=100, value=0, step=1) 
+num_input7 = st.number_input("Epsilon: ", min_value = -100, max_value=100, value=0, step=1) 
+st.button("Entra")
+
+
 
 progress_bar = st.sidebar.progress(0)
 status_text = st.sidebar.empty()
