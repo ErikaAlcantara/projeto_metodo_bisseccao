@@ -17,16 +17,22 @@ x2 = st.sidebar.number_input("Xˆ2: ", min_value = -100, max_value=100, value=0,
 x1 = st.sidebar.number_input("X: ", min_value = -100, max_value=100, value=0, step=1) 
 c= st.sidebar.number_input("C: ", min_value = -100, max_value=100, value=0, step=1) 
 ep = st.sidebar.number_input("Epsilon: ", min_value = -100, max_value=100, value=0, step=1) 
+y= -200
 
-
-d = {'f(x)': [x5,x4,x3,x2,c], 'g(x)': [5,4,3,2,1], 'h(x)': [6,7,8,9,10]}
-
+d = {
+    'f(x)': []
+}
+# ^^^, 'g(x)': [1,2], 'h(x)': [1,2]
+while y <= 200:
+    soma = (x5 * (y**5)) + (x4 * (y**4)) + (x3 * (y**3)) + (x2 * (y**2)) + (x * y) + c
+    d['f(x)'].append(soma) 
+    y += 1
 progress_bar = st.sidebar.progress(0)
 status_text = st.sidebar.empty()
 last_rows = pd.DataFrame(data=d)
 chart = st.line_chart(last_rows)
 
-d = {'f(x)': [], 'g(x)': [], 'h(x)': []}
+
 
 # st.write('Obs: grafico teste')
 # for i in range(1, 101):
