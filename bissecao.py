@@ -2,7 +2,7 @@ import streamlit as st
 import time
 import numpy as np
 import pandas as pd
-
+from bokeh.plotting import figure
 
 st.title('Aplicação para o Método da Bissecção')
 st.write('Dada a função: _X^5+_X^4+_X^3+_X^2+_X+C')
@@ -15,32 +15,31 @@ x2 = st.number_input("_Xˆ2: ", min_value = -100, max_value=100, value=0, step=1
 x = st.number_input("_X: ", min_value = -100, max_value=100, value=0, step=1) 
 c = st.number_input("C: ", min_value = -100, max_value=100, value=0, step=1) 
 e = st.number_input("Epsilon: ", min_value = -100, max_value=100, value=0, step=1) 
-y= -200
-
-d = {
-    'f(x)': []
-}
-# ^^^, 'g(x)': [1,2], 'h(x)': [1,2]
-while y <= 200:
+y = -100
+# define os resultados da função
+f = []
+# define o escopo do chart VV
+s = []
+# abre espaço dentro do escopo e grava os resultados da função dentro do chart
+while y <= 100:
     soma = (x5 * (y**5)) + (x4 * (y**4)) + (x3 * (y**3)) + (x2 * (y**2)) + (x * y) + c
-    d['f(x)'].append(soma) 
+    
+    f.append(soma)
+    s.append(y)
     y += 1
+
+# inserção do chart
+p = figure(
+    title='grafo',
+    x_axis_label='x',
+    y_axis_label='y'
+)
+# inserção da linha
+p.line(s, f, legend_label='f(x)', line_width=2)
 
 progress_bar = st.sidebar.progress(0)
 status_text = st.sidebar.empty()
-last_rows = pd.DataFrame(data=d)
-chart = st.line_chart(last_rows)
-
-
-
-# st.write('Obs: grafico teste')
-# for i in range(1, 101):
-#     new_rows = last_rows[-1, :] + np.random.randn(5, 1).cumsum(axis=0)
-#     status_text.text("%i%% Complete" % i)
-#     chart.add_rows(new_rows)
-#     progress_bar.progress(i)
-#     last_rows = new_rows
-#     time.sleep(0.05)
+chart = st.bokeh_chart(p, use_container_width=2)
 
 progress_bar.empty()
 
