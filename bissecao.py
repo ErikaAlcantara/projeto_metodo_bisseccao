@@ -3,19 +3,23 @@ import time
 import numpy as np
 import pandas as pd
 from bokeh.plotting import figure
+# Erika, preciso que vc instale o bokeh pra poder usar o grafo, vai no seu bash e digite [ pip install bokeh==2.2.0 ], caso contrário vc não vai conseguir ver o chart e vai dar erro no streamlit. :p
 
-st.title('Aplicação para o Método da Bissecção')
-<<<<<<< HEAD
-st.write('Dada a função: _X^5+_X^4+_X^3+_X^2+_X+C')
-st.write('Insira os valores da função:')
+st.sidebar.title('Método da Bissecção')
+st.sidebar.write('Dada a função: ')
+st.sidebar.latex(r"""a xˆ5 + b xˆ4 + c xˆ3 + d xˆ2 + ex + k""")
+st.sidebar.write('Insira os valores para as variáveis: ')
+# vale lembrar que o valor de X é dado pelo eixo X, ele não é passado na montagem da formula em si :D
+# fiz apenas algumas alterações nos titulos
 
-x5 = st.number_input("_Xˆ5: ", min_value = -100, max_value=100, value=0, step=1) 
-x4 = st.number_input("_Xˆ4: ", min_value = -100, max_value=100, value=0, step=1) 
-x3 = st.number_input("_Xˆ3: ", min_value = -100, max_value=100, value=0, step=1) 
-x2 = st.number_input("_Xˆ2: ", min_value = -100, max_value=100, value=0, step=1) 
-x = st.number_input("_X: ", min_value = -100, max_value=100, value=0, step=1) 
-c = st.number_input("C: ", min_value = -100, max_value=100, value=0, step=1) 
-e = st.number_input("Epsilon: ", min_value = -100, max_value=100, value=0, step=1) 
+x5 = st.sidebar.number_input("a: ", min_value = -100, max_value=100, value=0, step=1) 
+x4 = st.sidebar.number_input("b: ", min_value = -100, max_value=100, value=0, step=1) 
+x3 = st.sidebar.number_input("c: ", min_value = -100, max_value=100, value=0, step=1) 
+x2 = st.sidebar.number_input("d: ", min_value = -100, max_value=100, value=0, step=1) 
+x1 = st.sidebar.number_input("e: ", min_value = -100, max_value=100, value=0, step=1) 
+c= st.sidebar.number_input("k: ", min_value = -100, max_value=100, value=0, step=1) 
+ep = st.sidebar.number_input("Epsilon: ", min_value = -100, max_value=100, value=0, step=1) 
+
 y = -100
 # define os resultados da função
 f = []
@@ -23,45 +27,23 @@ f = []
 s = []
 # abre espaço dentro do escopo e grava os resultados da função dentro do chart
 while y <= 100:
-=======
-st.sidebar.title('Método da Bissecção')
-st.sidebar.write('Dada a função: ')
-st.sidebar.latex(r"""a xˆ5 + b xˆ4 + c xˆ3 + d xˆ2 + ex + c""")
-st.sidebar.write('Insira os valores para X: ')
-
-x5 = st.sidebar.number_input("Xˆ5: ", min_value = -100, max_value=100, value=0, step=1) 
-x4 = st.sidebar.number_input("Xˆ4: ", min_value = -100, max_value=100, value=0, step=1) 
-x3 = st.sidebar.number_input("Xˆ3: ", min_value = -100, max_value=100, value=0, step=1) 
-x2 = st.sidebar.number_input("Xˆ2: ", min_value = -100, max_value=100, value=0, step=1) 
-x1 = st.sidebar.number_input("X: ", min_value = -100, max_value=100, value=0, step=1) 
-c= st.sidebar.number_input("C: ", min_value = -100, max_value=100, value=0, step=1) 
-ep = st.sidebar.number_input("Epsilon: ", min_value = -100, max_value=100, value=0, step=1) 
-y= -200
-
-d = {
-    'f(x)': []
-}
-# ^^^, 'g(x)': [1,2], 'h(x)': [1,2]
-while y <= 200:
->>>>>>> cb7ddff00abdf89e8359a696de09d22f0f225744
-    soma = (x5 * (y**5)) + (x4 * (y**4)) + (x3 * (y**3)) + (x2 * (y**2)) + (x * y) + c
+    soma = (x5 * (y**5)) + (x4 * (y**4)) + (x3 * (y**3)) + (x2 * (y**2)) + (x1 * y) + c
     
     f.append(soma)
     s.append(y)
     y += 1
-<<<<<<< HEAD
 
 # inserção do chart
+
 p = figure(
     title='grafo',
     x_axis_label='x',
     y_axis_label='y'
 )
 # inserção da linha
+
 p.line(s, f, legend_label='f(x)', line_width=2)
 
-=======
->>>>>>> cb7ddff00abdf89e8359a696de09d22f0f225744
 progress_bar = st.sidebar.progress(0)
 status_text = st.sidebar.empty()
 chart = st.bokeh_chart(p, use_container_width=2)
