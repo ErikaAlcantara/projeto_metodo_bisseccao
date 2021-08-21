@@ -5,27 +5,33 @@ import pandas as pd
 
 
 st.title('Aplicação para o Método da Bissecção')
-st.write('Dada a função: X^5+X^4+X^3+X^2+X+C')
+st.write('Dada a função: _X^5+_X^4+_X^3+_X^2+_X+C')
 st.write('Insira os valores da função:')
 
-num_input1 = st.number_input("Xˆ5: ", min_value = -100, max_value=100, value=0, step=1) 
-num_input2 = st.number_input("Xˆ4: ", min_value = -100, max_value=100, value=0, step=1) 
-num_input3 = st.number_input("Xˆ3: ", min_value = -100, max_value=100, value=0, step=1) 
-num_input4 = st.number_input("Xˆ2: ", min_value = -100, max_value=100, value=0, step=1) 
-num_input5 = st.number_input("X: ", min_value = -100, max_value=100, value=0, step=1) 
-num_input6 = st.number_input("C: ", min_value = -100, max_value=100, value=0, step=1) 
-num_input7 = st.number_input("Epsilon: ", min_value = -100, max_value=100, value=0, step=1) 
-st.button("Entra")
+x5 = st.number_input("_Xˆ5: ", min_value = -100, max_value=100, value=0, step=1) 
+x4 = st.number_input("_Xˆ4: ", min_value = -100, max_value=100, value=0, step=1) 
+x3 = st.number_input("_Xˆ3: ", min_value = -100, max_value=100, value=0, step=1) 
+x2 = st.number_input("_Xˆ2: ", min_value = -100, max_value=100, value=0, step=1) 
+x = st.number_input("_X: ", min_value = -100, max_value=100, value=0, step=1) 
+c = st.number_input("C: ", min_value = -100, max_value=100, value=0, step=1) 
+e = st.number_input("Epsilon: ", min_value = -100, max_value=100, value=0, step=1) 
+y= -200
 
-
-d = {'f(x)': [1,2,3,4,5], 'g(x)': [5,4,3,2,1], 'h(x)': [6,7,8,9,10]}
+d = {
+    'f(x)': []
+}
+# ^^^, 'g(x)': [1,2], 'h(x)': [1,2]
+while y <= 200:
+    soma = (x5 * (y**5)) + (x4 * (y**4)) + (x3 * (y**3)) + (x2 * (y**2)) + (x * y) + c
+    d['f(x)'].append(soma) 
+    y += 1
 
 progress_bar = st.sidebar.progress(0)
 status_text = st.sidebar.empty()
 last_rows = pd.DataFrame(data=d)
 chart = st.line_chart(last_rows)
 
-d = {'f(x)': [], 'g(x)': [], 'h(x)': []}
+
 
 # st.write('Obs: grafico teste')
 # for i in range(1, 101):
