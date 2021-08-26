@@ -30,7 +30,7 @@ class Bissection:
         for _ in range(self.iterations):
             x_value += 1
             f_b = self.solve_function(x_value)
-            if not f_a * f_b >= 0:
+            if not f_a * f_b < 0:
                 b = x_value
                 interval.set_right_extreme(b)
                 # interval.append(b)
@@ -40,7 +40,7 @@ class Bissection:
                 for _ in range(self.iterations):
                     x_value -= 1
                     f_b = self.solve_function(x_value)
-                    if not f_a * f_b <= 0:
+                    if not f_a * f_b < 0:
                         b = x_value
                         interval.set_right_extreme(b)
                         # interval.append(b)
