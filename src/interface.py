@@ -7,7 +7,7 @@ from bokeh.plotting import figure
 
 st.sidebar.title('Método da Bissecção')
 st.sidebar.write('Dada a função: ')
-st.sidebar.latex(r"""a xˆ5 + b xˆ4 + c xˆ3 + d xˆ2 + ex + k""")
+st.sidebar.latex(r'''a xˆ5 + b xˆ4 + c xˆ3 + d xˆ2 + ex + k''')
 st.sidebar.write('Insira os valores para as variáveis: ')
 # vale lembrar que o valor de X é dado pelo eixo X, ele não é passado na montagem da formula em si :D
 # fiz apenas algumas alterações nos titulos
@@ -49,6 +49,8 @@ status_text = st.sidebar.empty()
 chart = st.bokeh_chart(p, use_container_width=2)
 
 progress_bar.empty()
+
+
 
 # Streamlit widgets automatically run the script from top to bottom. Since
 # this button is not connected to any other logic, it just causes a plain
