@@ -20,6 +20,13 @@ x1 = st.sidebar.number_input("e: ", min_value = -100, max_value=100, value=0, st
 c= st.sidebar.number_input("k: ", min_value = -100, max_value=100, value=0, step=1) 
 ep = st.sidebar.number_input("Epsilon: ", min_value = -100, max_value=100, value=0, step=1) 
 
+grau = 0
+if x1!=0: grau = 1
+if x2!=0: grau = 2
+if x3!=0: grau = 3
+if x4!=0: grau = 4
+if x5!=0: grau = 5
+
 y = -100
 # define os resultados da função
 f = []
