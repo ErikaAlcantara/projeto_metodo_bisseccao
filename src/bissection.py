@@ -20,33 +20,43 @@ class Bissection:
         return (self.a*x_value**5 + self.b*x_value**4 + self.c*x_value**3 + self.d*x_value**2 + self.e*x_value + self.constant)
 
     def get_intervals(self, x_value):
-        interval = Interval()
+        # interval = Interval()
         f_a = self.solve_function(x_value)
         a = x_value
-        interval.set_left_extreme(a)
+        # interval.set_left_extreme(a)
+        lista = []
         # interval.apped(a)
         
+        for _ in range(self.iterations):
+            x_value -= 1
+            f_b = self.solve_function(x_value)
+            if  f_a * f_b < 0:
+                b = x_value
+                temp_list = []
+                temp_list.append(a)
+                temp_list.append(b)
+                lista.insert(0, temp_list)
+                a = b
+                # interval.set_right_extreme(b)
+                # interval.append(b)
         
         for _ in range(self.iterations):
             x_value += 1
             f_b = self.solve_function(x_value)
             if  f_a * f_b < 0:
                 b = x_value
-                interval.set_right_extreme(b)
-                # interval.append(b)
-                break
-            else:
-                x_value = 0
-                for _ in range(self.iterations):
-                    x_value -= 1
-                    f_b = self.solve_function(x_value)
-                    if  f_a * f_b < 0:
-                        b = x_value
-                        interval.set_right_extreme(b)
-                        # interval.append(b)
-                        break
+                temp_list = []
+                # interval.set_right_extreme(b)
+                temp_list.append(a)
+                temp_list.append(b)
+                lista.append(temp_list)
+                a = b
         
-        self.intervals.append(interval)
+        return lista
+                
+    
+        
+        # self.intervals.append(interval)
         # return interval
 
 

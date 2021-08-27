@@ -1,8 +1,8 @@
 from bissection import Bissection
 if __name__ == '__main__':
     bissection_solver = Bissection(0,0,1,0,-9,3, 0.003)
-    bissection_solver.get_intervals(0)
-    for interval in bissection_solver.intervals:
-        print(str(interval.left_extreme) + "," + str(interval.right_extreme))
+    print(bissection_solver.get_intervals(0))
+    # for interval in bissection_solver.intervals:
+    #     print(str(interval.left_extreme) + "," + str(interval.right_extreme))
     
-    print(len(bissection_solver.intervals))
+    # print(len(bissection_solver.intervals))
