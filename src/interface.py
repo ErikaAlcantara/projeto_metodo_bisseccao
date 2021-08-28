@@ -17,7 +17,7 @@ x4 = st.sidebar.number_input("b: ", min_value = -100, max_value=100, value=0, st
 x3 = st.sidebar.number_input("c: ", min_value = -100, max_value=100, value=0, step=1) 
 x2 = st.sidebar.number_input("d: ", min_value = -100, max_value=100, value=0, step=1) 
 x1 = st.sidebar.number_input("e: ", min_value = -100, max_value=100, value=0, step=1) 
-c= st.sidebar.number_input("k: ", min_value = -100, max_value=100, value=0, step=1) 
+k= st.sidebar.number_input("k: ", min_value = -100, max_value=100, value=0, step=1) 
 ep = st.sidebar.number_input("Epsilon: ", min_value = -100, max_value=100, value=0, step=1) 
 
 grau = 0
@@ -34,7 +34,7 @@ f = []
 s = []
 # abre espaço dentro do escopo e grava os resultados da função dentro do chart
 while y <= 100:
-    soma = (x5 * (y**5)) + (x4 * (y**4)) + (x3 * (y**3)) + (x2 * (y**2)) + (x1 * y) + c
+    soma = (x5 * (y**5)) + (x4 * (y**4)) + (x3 * (y**3)) + (x2 * (y**2)) + (x1 * y) + k
     
     f.append(soma)
     s.append(y)
@@ -55,9 +55,24 @@ progress_bar = st.sidebar.progress(0)
 status_text = st.sidebar.empty()
 chart = st.bokeh_chart(p, use_container_width=2)
 
-progress_bar.empty()
+# progress_bar.empty()
+def mk_table():
 
+    a = []
+    b = []
+    c = []
+    Fa = []
+    Fb = []
+    Fc = []
+    b_a = []
 
+    return pd.DataFrame(data = {'A':a, 'B':b, 'F(a)':Fa, 'F(b)':Fb,'C=(a+b)/2':c,'F(c)':Fc, 'B-A':b_a})
+# essa linha abaixo vai fazer uma tabela de qualquer coisa que vc por dentro, por isso q eu preciso saber como vc vai me passar os dados
+st.table(mk_table())
+st.table(mk_table())
+st.table(mk_table())
+st.table(mk_table())
+st.table(mk_table())
 
 # Streamlit widgets automatically run the script from top to bottom. Since
 # this button is not connected to any other logic, it just causes a plain
