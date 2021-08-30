@@ -2,9 +2,7 @@ from interval import Interval
 import math
 class Bissection:
     def __init__(self, a, b, c, d, e, constant, epsilon):
-        self.x_value = 0
         self.epsilon = epsilon
-        self.iterations = 100
         self.epsilon = epsilon
         self.a = a
         self.b = b
@@ -12,72 +10,63 @@ class Bissection:
         self.d = d
         self.e = e
         self.constant = constant
-        self.function_roots = []
-        self.intervals = []
-    
-    
+        
+
     def solve_function (self, x_value):
         return (self.a*x_value**5 + self.b*x_value**4 + self.c*x_value**3 + self.d*x_value**2 + self.e*x_value + self.constant)
 
-    def get_intervals(self, x_value):
-        # interval = Interval()
-        f_a = self.solve_function(x_value)
-        a = x_value
-        # interval.set_left_extreme(a)
-        lista = []
-        # interval.apped(a)
+    def g_minus_h (self, degree, x_value):
+        if degree == 5:
+            g_x = self.a*x_value**5
+            h_x = self.b*x_value**4 + self.c*x_value**3 + self.d*x_value**2 + self.e*x_value + self.constant
+            return g_x - h_x
+        elif degree == 4:
+            g_x = self.a*x_value**4
+            h_x = self.c*x_value**3 + self.d*x_value**2 + self.e*x_value + self.constant
+            return g_x - h_x
+        elif degree == 3:
+            g_x = self.a*x_value**3
+            h_x = self.d*x_value**2 + self.e*x_value + self.constant
+            return g_x - h_x
+        elif degree == 2:
+            g_x = self.a*x_value**2
+            h_x = self.e*x_value + self.constant
+            return g_x - h_x     
+        else:
+            return self.e*x_value + self.constant
+         
+
+    def get_intervals(self, grau):
+        all_intervalls = []
+        a = -100
+        while len(all_intervalls) <= grau:
+            for b in range(-99, 101):
+                if self.solve_function(a) * self.solve_function(b) < 0:       
+                    all_intervalls.append([a,b])
+                a +=1
+            break   
+        return all_intervalls
+            
+    def apply_bissection(self, all_intervalls):
+        midpoints = []
+        for i in all_intervalls:
+            a = i[0]
+            b = i[1]
+            while not b-a < self.epsilon:
+                midpoint = (a+b)/2
+                if self.solve_function(midpoint) < 0:
+                    a = midpoint
+                elif self.solve_function(midpoint) > 0:
+                    b = midpoint
+                else:
+                    exact_root = midpoint
+                    self.midpoints(exact_root)
+
+            self.midpoints.append(midpoint)
+
+        return midpoints
         
-        for _ in range(self.iterations):
-            x_value -= 1
-            f_b = self.solve_function(x_value)
-            if  f_a * f_b < 0:
-                b = x_value
-                temp_list = []
-                temp_list.append(a)
-                temp_list.append(b)
-                lista.insert(0, temp_list)
-                a = b
-                # interval.set_right_extreme(b)
-                # interval.append(b)
-        
-        for _ in range(self.iterations):
-            x_value += 1
-            f_b = self.solve_function(x_value)
-            if  f_a * f_b < 0:
-                b = x_value
-                temp_list = []
-                # interval.set_right_extreme(b)
-                temp_list.append(a)
-                temp_list.append(b)
-                lista.append(temp_list)
-                a = b
-        
-        return lista
-                
     
-        
-        # self.intervals.append(interval)
-        # return interval
-
-
-    def apply_bissection(self, interval):
-        a = interval[0]
-        b = interval[1]
-        
-        while not b-a < self.epsilon:
-            midpoint = (a+b)/2
-            if midpoint < 0:
-                a = midpoint
-            elif midpoint > 0:
-                b = midpoint
-            else:
-                exact_root = midpoint
-                self.function_roots.append(exact_root)
-                # return exact_root
-
-        self.function_roots.append(midpoint)
-        
-        # return midpoint
 
                 
 
