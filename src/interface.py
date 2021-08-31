@@ -34,6 +34,8 @@ f = []
 # define o escopo do chart VV
 s = []
 # abre espaço dentro do escopo e grava os resultados da função dentro do chart
+
+
 while y <= 100:
     soma = (x5 * (y**5)) + (x4 * (y**4)) + (x3 * (y**3)) + (x2 * (y**2)) + (x1 * y) + k
     
