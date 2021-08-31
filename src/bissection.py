@@ -11,6 +11,14 @@ class Bissection:
         self.e = e
         self.constant = constant
         
+    def get_grau(self):
+        grau = 0
+        if self.e!=0: grau = 1
+        if self.d!=0: grau = 2
+        if self.c!=0: grau = 3
+        if self.b!=0: grau = 4
+        if self.a!=0: grau = 5
+        return grau
 
     def solve_function (self, x_value):
         return (self.a*x_value**5 + self.b*x_value**4 + self.c*x_value**3 + self.d*x_value**2 + self.e*x_value + self.constant)
@@ -51,8 +59,11 @@ class Bissection:
         return all_intervalls
             
     def apply_bissection(self, all_intervalls):
-        midpoints = []
+        
+        all_tables = []
         for i in all_intervalls:
+            table = []
+            midpoints = []
             a = i[0]
             b = i[1]
             while not b-a < self.epsilon:
@@ -62,12 +73,14 @@ class Bissection:
                 elif self.solve_function(midpoint) > 0:
                     b = midpoint
                 else:
-                    exact_root = midpoint
-                    midpoints.append(exact_root)
+                    a = midpoint
+                    b = midpoint
+                midpoints.append([a, b])
+            table.append(midpoints)
+            all_tables.append(table)    
+        return all_tables
+        
 
-            midpoints.append([a,b])
-
-        return midpoints
         
     
 

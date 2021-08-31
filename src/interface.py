@@ -19,7 +19,7 @@ x3 = st.sidebar.number_input("c: ", min_value = -100, max_value=100, value=0, st
 x2 = st.sidebar.number_input("d: ", min_value = -100, max_value=100, value=0, step=1) 
 x1 = st.sidebar.number_input("e: ", min_value = -100, max_value=100, value=0, step=1) 
 k= st.sidebar.number_input("k: ", min_value = -100, max_value=100, value=0, step=1) 
-ep = st.sidebar.number_input("Epsilon: ", min_value = -100, max_value=100, value=0, step=1) 
+ep = st.sidebar.number_input("Epsilon: ", min_value=-100, max_value=100, value=0, step=1) 
 
 grau = 0
 if x1!=0: grau = 1
@@ -59,7 +59,7 @@ chart = st.bokeh_chart(p, use_container_width=2)
 # progress_bar.empty()
 
 def mk_table(x):
-    # self.ep = ep
+    # print(x)
     a = []
     b = []
     c = []
@@ -67,22 +67,24 @@ def mk_table(x):
     Fb = []
     Fc = []
     b_a = []
-    a.append(x[0])
-    b.append(x[1])
-    c.append((x[0]+x[1])/2)
-    Fa.append(bissection_solver.solve_function(x[0]))
-    Fb.append(bissection_solver.solve_function(x[1]))
-    Fc.append(bissection_solver.solve_function((x[0] + x[1]) / 2))
-    b_a.append(x[0] - x[1])
-
+    for i in x: 
+        a.append(i[0])
+        b.append(i[1])
+        c.append((i[0]+i[1])/2)
+        Fa.append(bissection_solver.solve_function(i[0]))
+        Fb.append(bissection_solver.solve_function(i[1]))
+        Fc.append(bissection_solver.solve_function((i[0] + i[1]) / 2))
+        b_a.append(i[0] - i[1])
 
 
     return pd.DataFrame(data = {'A':a, 'B':b, 'F(a)':Fa, 'F(b)':Fb,'C=(a+b)/2':c,'F(c)':Fc, 'B-A':b_a})
 # essa linha abaixo vai fazer uma tabela de qualquer coisa que vc por dentro, por isso q eu preciso saber como vc vai me passar os dados
+# bissection_solver = Bissection(x5,x4,x3,x2,x1,k, ep)
 bissection_solver = Bissection(0,0,1,0,-9,3, 0.003)
 
-for i in bissection_solver.apply_bissection(bissection_solver.get_intervals(grau)):
-    st.table(mk_table(i))
+for i in bissection_solver.apply_bissection(bissection_solver.get_intervals(bissection_solver.get_grau())):
+    for j in i :
+        st.table(mk_table(j))
 
 # Streamlit widgets automatically run the script from top to bottom. Since
 # this button is not connected to any other logic, it just causes a plain
