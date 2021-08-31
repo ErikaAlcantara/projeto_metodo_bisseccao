@@ -4,7 +4,6 @@ import numpy as np
 import pandas as pd
 from bokeh.plotting import figure
 from bissection import Bissection
-
 # Erika, preciso que vc instale o bokeh pra poder usar o grafo, vai no seu bash e digite [ pip install bokeh==2.2.0 ], caso contrário vc não vai conseguir ver o chart e vai dar erro no streamlit. :p
 
 st.sidebar.title('Método da Bissecção')
@@ -59,8 +58,8 @@ chart = st.bokeh_chart(p, use_container_width=2)
 
 # progress_bar.empty()
 
-def mk_table():
-
+def mk_table(x):
+    # self.ep = ep
     a = []
     b = []
     c = []
@@ -68,11 +67,22 @@ def mk_table():
     Fb = []
     Fc = []
     b_a = []
+    a.append(x[0])
+    b.append(x[1])
+    c.append((x[0]+x[1])/2)
+    Fa.append(bissection_solver.solve_function(x[0]))
+    Fb.append(bissection_solver.solve_function(x[1]))
+    Fc.append(bissection_solver.solve_function((x[0] + x[1]) / 2))
+    b_a.append(x[0] - x[1])
+
+
 
     return pd.DataFrame(data = {'A':a, 'B':b, 'F(a)':Fa, 'F(b)':Fb,'C=(a+b)/2':c,'F(c)':Fc, 'B-A':b_a})
 # essa linha abaixo vai fazer uma tabela de qualquer coisa que vc por dentro, por isso q eu preciso saber como vc vai me passar os dados
+bissection_solver = Bissection(0,0,1,0,-9,3, 0.003)
 
-
+for i in bissection_solver.apply_bissection(bissection_solver.get_intervals(grau)):
+    st.table(mk_table(i))
 
 # Streamlit widgets automatically run the script from top to bottom. Since
 # this button is not connected to any other logic, it just causes a plain
