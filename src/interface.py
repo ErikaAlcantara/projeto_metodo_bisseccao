@@ -4,29 +4,29 @@ import numpy as np
 import pandas as pd
 from bokeh.plotting import figure
 from bissection import Bissection
-# Erika, preciso que vc instale o bokeh pra poder usar o grafo, vai no seu bash e digite [ pip install bokeh==2.2.0 ], caso contrário vc não vai conseguir ver o chart e vai dar erro no streamlit. :p
 
 st.sidebar.title('Método da Bissecção')
 st.sidebar.write('Dada a função: ')
-st.sidebar.latex(r'''a xˆ5 + b xˆ4 + c xˆ3 + d xˆ2 + ex + k''')
+st.sidebar.latex(r'''axˆ5 + bxˆ4 + cxˆ3 + dxˆ2 + ex + k''')
 st.sidebar.write('Insira os valores para as variáveis: ')
-# vale lembrar que o valor de X é dado pelo eixo X, ele não é passado na montagem da formula em si :D
-# fiz apenas algumas alterações nos titulos
+
 
 x5 = st.sidebar.number_input("a: ", min_value = -100, max_value=100, value=0, step=1) 
 x4 = st.sidebar.number_input("b: ", min_value = -100, max_value=100, value=0, step=1) 
 x3 = st.sidebar.number_input("c: ", min_value = -100, max_value=100, value=0, step=1) 
 x2 = st.sidebar.number_input("d: ", min_value = -100, max_value=100, value=0, step=1) 
 x1 = st.sidebar.number_input("e: ", min_value = -100, max_value=100, value=0, step=1) 
-k= st.sidebar.number_input("k: ", min_value = -100, max_value=100, value=0, step=1) 
+k= st.sidebar.number_input("k: ", min_value = -100, max_value=100, value=0, step=1)
+st.sidebar.latex(r'''10^e''') 
 ep = st.sidebar.number_input("Epsilon: ", min_value=-100, max_value=100, value=0, step=1) 
+ep = 10**ep
 
-grau = 0
-if x1!=0: grau = 1
-if x2!=0: grau = 2
-if x3!=0: grau = 3
-if x4!=0: grau = 4
-if x5!=0: grau = 5
+degree = 0
+if x1!=0: degree = 1
+if x2!=0: degree = 2
+if x3!=0: degree = 3
+if x4!=0: degree = 4
+if x5!=0: degree = 5
 
 y = -100
 # define os resultados da função
@@ -37,9 +37,9 @@ s = []
 
 
 while y <= 100:
-    soma = (x5 * (y**5)) + (x4 * (y**4)) + (x3 * (y**3)) + (x2 * (y**2)) + (x1 * y) + k
+    function_sum = (x5 * (y**5)) + (x4 * (y**4)) + (x3 * (y**3)) + (x2 * (y**2)) + (x1 * y) + k
     
-    f.append(soma)
+    f.append(function_sum)
     s.append(y)
     y += 1
 
@@ -82,9 +82,9 @@ def mk_table(x):
     return pd.DataFrame(data = {'A':a, 'B':b, 'F(a)':Fa, 'F(b)':Fb,'C=(a+b)/2':c,'F(c)':Fc, 'B-A':b_a})
 # essa linha abaixo vai fazer uma tabela de qualquer coisa que vc por dentro, por isso q eu preciso saber como vc vai me passar os dados
 # bissection_solver = Bissection(x5,x4,x3,x2,x1,k, ep)
-bissection_solver = Bissection(0,0,1,0,-9,3, 0.003)
+bissection_solver = Bissection(x5,x4,x3,x2,x1,k, ep)
 
-for i in bissection_solver.apply_bissection(bissection_solver.get_intervals(bissection_solver.get_grau())):
+for i in bissection_solver.apply_bissection(bissection_solver.get_intervals(bissection_solver.get_degree())):
     for j in i :
         st.table(mk_table(j))
 

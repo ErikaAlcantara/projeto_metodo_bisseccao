@@ -1,4 +1,4 @@
-from interval import Interval
+# from interval import Interval
 import math
 class Bissection:
     def __init__(self, a, b, c, d, e, constant, epsilon):
@@ -11,14 +11,14 @@ class Bissection:
         self.e = e
         self.constant = constant
         
-    def get_grau(self):
-        grau = 0
-        if self.e!=0: grau = 1
-        if self.d!=0: grau = 2
-        if self.c!=0: grau = 3
-        if self.b!=0: grau = 4
-        if self.a!=0: grau = 5
-        return grau
+    def get_degree(self):
+        degree = 0
+        if self.e!=0: degree = 1
+        if self.d!=0: degree = 2
+        if self.c!=0: degree = 3
+        if self.b!=0: degree = 4
+        if self.a!=0: degree = 5
+        return degree
 
     def solve_function (self, x_value):
         return (self.a*x_value**5 + self.b*x_value**4 + self.c*x_value**3 + self.d*x_value**2 + self.e*x_value + self.constant)
@@ -47,10 +47,10 @@ class Bissection:
     
         
 
-    def get_intervals(self, grau):
+    def get_intervals(self, degree):
         all_intervalls = []
         a = -100
-        while len(all_intervalls) <= grau:
+        while len(all_intervalls) <= degree:
             for b in range(-99, 101):
                 if self.solve_function(a) * self.solve_function(b) < 0:       
                     all_intervalls.append([a,b])
@@ -66,6 +66,7 @@ class Bissection:
             midpoints = []
             a = i[0]
             b = i[1]
+            midpoints.append([a,b])
             while not b-a < self.epsilon:
                 midpoint = (a+b)/2
                 if self.solve_function(midpoint) < 0:
