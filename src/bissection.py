@@ -15,26 +15,29 @@ class Bissection:
     def solve_function (self, x_value):
         return (self.a*x_value**5 + self.b*x_value**4 + self.c*x_value**3 + self.d*x_value**2 + self.e*x_value + self.constant)
 
-    def g_minus_h (self, degree, x_value):
+    def g_of_x(self, degree, x_value):
         if degree == 5:
-            g_x = self.a*x_value**5
-            h_x = self.b*x_value**4 + self.c*x_value**3 + self.d*x_value**2 + self.e*x_value + self.constant
-            return g_x - h_x
+            return self.a*x_value**5
         elif degree == 4:
-            g_x = self.a*x_value**4
-            h_x = self.c*x_value**3 + self.d*x_value**2 + self.e*x_value + self.constant
-            return g_x - h_x
+            return self.b*x_value**4
         elif degree == 3:
-            g_x = self.a*x_value**3
-            h_x = self.d*x_value**2 + self.e*x_value + self.constant
-            return g_x - h_x
+            return self.c*x_value**3
         elif degree == 2:
-            g_x = self.a*x_value**2
-            h_x = self.e*x_value + self.constant
-            return g_x - h_x     
+            return self.d*x_value**2
         else:
             return self.e*x_value + self.constant
-         
+    
+    def h_of_x (self, x_value, degree):
+        if degree == 5:
+            return self.b*x_value**4 + self.c*x_value**3 + self.d*x_value**2 + self.e*x_value + self.constant
+        elif degree == 4:
+            return self.c*x_value**3 + self.d*x_value**2 + self.e*x_value + self.constant
+        elif degree == 3:
+            return self.d*x_value**2 + self.e*x_value + self.constant
+        else:
+            return self.e*x_value + self.constant
+    
+        
 
     def get_intervals(self, grau):
         all_intervalls = []

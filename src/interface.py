@@ -3,6 +3,7 @@ import time
 import numpy as np
 import pandas as pd
 from bokeh.plotting import figure
+from bissection import Bissection
 # Erika, preciso que vc instale o bokeh pra poder usar o grafo, vai no seu bash e digite [ pip install bokeh==2.2.0 ], caso contrário vc não vai conseguir ver o chart e vai dar erro no streamlit. :p
 
 st.sidebar.title('Método da Bissecção')
