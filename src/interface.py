@@ -43,7 +43,7 @@ s = []
 while y <= 100:
     function_sum = (x5 * (y**5)) + (x4 * (y**4)) + (x3 * (y**3)) + (x2 * (y**2)) + (x1 * y) + k
     
-    f.append(function_sum)
+    f.append(bissection_solver.solve_function(y))
     fg.append(bissection_solver.g_of_x(bissection_solver.get_degree(),y))
     fh.append(bissection_solver.h_of_x(bissection_solver.get_degree(),y))
     s.append(y)
