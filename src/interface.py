@@ -21,6 +21,8 @@ st.sidebar.latex(r'''10^e''')
 ep = st.sidebar.number_input("Epsilon: ", min_value=-100, max_value=100, value=0, step=1) 
 ep = 10**ep
 
+bissection_solver = Bissection(x5, x4, x3, x2, x1, k, ep)
+
 degree = 0
 if x1!=0: degree = 1
 if x2!=0: degree = 2
@@ -31,6 +33,8 @@ if x5!=0: degree = 5
 y = -100
 # define os resultados da função
 f = []
+fg = []
+fh = []
 # define o escopo do chart VV
 s = []
 # abre espaço dentro do escopo e grava os resultados da função dentro do chart
@@ -40,6 +44,8 @@ while y <= 100:
     function_sum = (x5 * (y**5)) + (x4 * (y**4)) + (x3 * (y**3)) + (x2 * (y**2)) + (x1 * y) + k
     
     f.append(function_sum)
+    fg.append(bissection_solver.g_of_x(bissection_solver.get_degree(),y))
+    fh.append(bissection_solver.h_of_x(bissection_solver.get_degree(),y))
     s.append(y)
     y += 1
 
@@ -52,7 +58,10 @@ p = figure(
 )
 # inserção da linha
 
-p.line(s, f, legend_label='f(x)', line_width=2)
+p.line(s, f, legend_label=' f(x)', line_color="blue", line_width=2)
+p.line(s, fg, legend_label='g(x)', line_color="red", line_width=2)
+p.line(s, fh, legend_label='h(x)', line_color="green", line_width=2)
+
 
 progress_bar = st.sidebar.progress(0)
 status_text = st.sidebar.empty()
@@ -82,7 +91,6 @@ def mk_table(x):
     return pd.DataFrame(data = {'A':a, 'B':b, 'F(a)':Fa, 'F(b)':Fb,'C=(a+b)/2':c,'F(c)':Fc, 'B-A':b_a})
 # essa linha abaixo vai fazer uma tabela de qualquer coisa que vc por dentro, por isso q eu preciso saber como vc vai me passar os dados
 # bissection_solver = Bissection(x5,x4,x3,x2,x1,k, ep)
-bissection_solver = Bissection(x5,x4,x3,x2,x1,k, ep)
 
 for i in bissection_solver.apply_bissection(bissection_solver.get_intervals(bissection_solver.get_degree())):
     for j in i :
