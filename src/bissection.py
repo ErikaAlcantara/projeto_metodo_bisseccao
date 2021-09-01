@@ -33,7 +33,7 @@ class Bissection:
         elif degree == 2:
             return self.d*x_value**2
         else:
-            return self.e*x_value + self.constant
+            return self.e*x_value
     
     def h_of_x (self, degree, x_value):
         if degree == 5:
@@ -42,8 +42,10 @@ class Bissection:
             return self.c*x_value**3 + self.d*x_value**2 + self.e*x_value + self.constant
         elif degree == 3:
             return self.d*x_value**2 + self.e*x_value + self.constant
-        else:
+        elif degree == 2:
             return self.e*x_value + self.constant
+        else:
+            return self.constant
     
         
 
