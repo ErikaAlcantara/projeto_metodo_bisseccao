@@ -88,7 +88,7 @@ def mk_table(x):
         b_a.append(i[0] - i[1])
 
 
-    return pd.DataFrame(data = {'A':a, 'B':b, 'F(a)':Fa, 'F(b)':Fb,'C=(a+b)/2':c,'F(c)':Fc, 'B-A':b_a})
+    return pd.DataFrame(data = {'a':a, 'b':b, 'f(a)':Fa, 'f(b)':Fb,'x=(a+b)/2':c,'F(x)':Fc, 'b-a':b_a})
 # essa linha abaixo vai fazer uma tabela de qualquer coisa que vc por dentro, por isso q eu preciso saber como vc vai me passar os dados
 # bissection_solver = Bissection(x5,x4,x3,x2,x1,k, ep)
 

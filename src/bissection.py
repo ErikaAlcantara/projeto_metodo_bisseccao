@@ -69,12 +69,12 @@ class Bissection:
             a = i[0]
             b = i[1]
             midpoints.append([a,b])
-            while not b-a < self.epsilon:
+            while b-a >= self.epsilon:
                 midpoint = (a+b)/2
-                if self.solve_function(midpoint) < 0:
-                    a = midpoint
-                elif self.solve_function(midpoint) > 0:
+                if self.solve_function(midpoint) * self.solve_function(a) < 0:
                     b = midpoint
+                elif self.solve_function(midpoint)*self.solve_function(b) < 0:
+                    a = midpoint
                 else:
                     a = midpoint
                     b = midpoint
